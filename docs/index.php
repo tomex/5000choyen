@@ -19,9 +19,9 @@
 <body>
 	<h1>5000兆円ジェネレーター</h1>
 	<div id="iosView">
-		<img id="iosImg" src="" alt="見たなこいつ！" width="0" height="150">
+		<img id="imgTag" src="" alt="見たなこいつ！" width="0" height="150">
 	</div>
-	<div id="svgView">
+	<div id="svgView" class="hidden">
 		<svg xmlns="http://www.w3.org/2000/svg" id="svg" width="0" height="150">
 			<style type="text/css">
 				@font-face {
@@ -57,7 +57,7 @@
 				<stop offset="1.00" stop-color="rgb(5, 0, 0)"/>
 			</linearGradient>
 			<rect width="100%" height="100%" fill="none" />
-			<g stroke-linejoin="miter" id="draw" transform="matrix(1,0,0,1,0,0) matrix(1,0,-0.4,1,0,0)" font-family="'ＤＦＰ超極太ゴシック体','DFGothic-SU','Noto Sans Japanese'">
+			<g stroke-linejoin="bevel" id="draw" transform="matrix(1,0,0,1,0,0) matrix(1,0,-0.4,1,0,0)" font-family="'ＤＦＰ超極太ゴシック体','DFGothic-SU','Noto Sans Japanese'">
 				<g fill="none">
 					<text x="64px" y="104px" font-size="100px" class="text" stroke-width="22px" stroke="#000">5000兆円欲しい！</text>
 					<text x="64px" y="104px" font-size="100px" class="text" stroke-width="20px" stroke="url(#grad_silver)">5000兆円欲しい！</text>
@@ -72,7 +72,7 @@
 		</svg>
 	</div>
 	<div>
-		<input type="text" id="textbox" size="50" value="5000兆円欲しい！" spellcheck="false" oninput="redraw();">
+		<input type="text" id="textbox" size="50" value="5000兆円欲しい！" spellcheck="false" oninput="reDraw();">
 		<button type="button" onclick="saveImage();">画像を保存する</button>
 	</div>
 	<p>

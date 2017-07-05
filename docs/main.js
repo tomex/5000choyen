@@ -1,4 +1,4 @@
-var textbox, classText, svg, draw, canvasDraw, iosImg;
+var textbox, classText, svg, draw, canvasDraw, imgTag;
 
 window.onload = function () {
 	textbox = document.getElementById("textbox");
@@ -6,18 +6,18 @@ window.onload = function () {
 	svg = document.getElementById("svg");
 	canvasDraw = document.getElementById("canvas-draw");
 	classText = document.querySelectorAll(".text");
-	iosImg = document.getElementById("iosImg");
-	var ua = window.navigator.userAgent.toLowerCase();
-	if ( ua.indexOf('iphone') >= 0 || ua.indexOf('ipod') >= 0 || ua.indexOf('ipad') >= 0 ){
-		document.getElementById("svgView").setAttribute("class","hidden");
-	}else{
-		iosImg = undefined;
-		document.getElementById("iosView").setAttribute("class","hidden");
-	}
-	redraw();
+	imgTag = document.getElementById("imgTag");
+	reDraw();
 };
 
 function saveImage() {
+	var a = document.createElement("a");
+	a.setAttribute("download", name);
+	a.href = imgTag,getAttribute("src");
+	a.click();
+}
+
+function convertDraw(){
 	var width = svg.getAttribute("width") * 3;
 	var height = svg.getAttribute("height") * 3;
 	var img = new Image;
@@ -34,16 +34,9 @@ function saveImage() {
 		context.drawImage(img,0,0,width,height);
 		var name = textbox.value+".png";
 		var data = canvas.toDataURL("image/png");
-			console.log(data);
-		if (iosImg !== undefined){
-			iosImg.setAttribute("src",data);
-			iosImg.setAttribute("alt",name);
-		}else{
-			var a = document.createElement("a");
-			a.setAttribute("download", name);
-			a.href = data;
-			a.click();
-		}
+		console.log(data);
+		imgTag.setAttribute("src",data);
+		imgTag.setAttribute("alt",name);
 		DOMURL.revokeObjectURL(url);
 		while (canvasDraw.firstChild) {
 			canvasDraw.removeChild(canvasDraw.firstChild);
@@ -52,7 +45,7 @@ function saveImage() {
 	img.src = url;
 }
 
-function redraw() {
+function reDraw() {
 	var text = textbox.value;
 	if (classText.length > 0){
 		for(var i=0;i<classText.length;i++){
@@ -62,8 +55,7 @@ function redraw() {
 	var size = draw.getBBox();
 	var width = size.width + size.x;
 	svg.setAttribute("width",width);
-	if (iosImg !== undefined){
-		iosImg.setAttribute("width",width);
-		saveImage();
-	}
+	imgTag.setAttribute("width",width);
+	
+	convertDraw();
 }
